@@ -1,5 +1,6 @@
 class Api::SessionsController < ApplicationController
-  before_action :require_login
+
+  before_action :require_login, only: [:destroy]
 
 
   def create
@@ -13,8 +14,8 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    logout(@user)
-    redirect_to new_session_url
+    logout
+    render json: {}, status: 404
   end
 
 end
